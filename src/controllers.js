@@ -24,7 +24,7 @@ router.get("/add/:a/:b", async function (req, res) {
   if (isNaN(a) || isNaN(b)) {
     res.status(400).send("Uno de los parámetros no es un número");
   } else {
-    const result = a + b;
+    const result = core.add(a, b);
     return res.send({result});
   }
 });
@@ -37,7 +37,7 @@ router.get("/div/:a/:b", async function (req, res) {
   if (isNaN(a) || isNaN(b) || b === 0) {
     res.status(400).send("Los parámetros no son válidos para la división");
   } else {
-    const result = a / b;
+    const result = core.div(a, b);
     return res.send({result});
   }
 });
