@@ -65,3 +65,15 @@ describe("Prueba de la funcion producto", () => {
     expect(core.mul(-10, -5)).toBe(50);
   });
 });
+
+describe("Prueba de la funcion potencia", () => {
+  //potencia de numeros enteros positivos
+  test("4^ 2 debe ser igual a 16", () => {
+    expect(core.pow(4, 2)).toBe(16);
+  });
+
+  //potencia con base negativa y exponente positivo
+  test("-4^ 2 debe ser igual a 16", () => {
+    expect(core.pow(-4, 2)).toBe(16);
+  });
+});

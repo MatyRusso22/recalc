@@ -55,4 +55,17 @@ router.get("/multiply/:a/:b", async function (req, res) {
   }
 });
 
+router.get("/pow/:a/:b", async function (req, res) {
+  const params = req.params;
+  const a = Number(params.a);
+  const b = Number(params.b);
+
+  if (isNaN(a) || isNaN(b)) {
+    res.status(400).send("Los parámetros no son válidos para la potencia");
+  } else {
+    const result = core.pow(a, b);
+    return res.send({result});
+  }
+});
+
 export default router;
