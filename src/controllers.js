@@ -14,6 +14,13 @@ router.get("/sub/:a/:b", async function (req, res) {
         res.status(400).send('Uno de los parámetros no es un número');
     } else {
         const result = core.sub(a, b);
+  if (isNaN(a) || isNaN(b)) {
+    res.status(400).send({error: "Uno de los parámetros no es un número"});
+  } else {
+    const result = core.sub(a, b);
+    return res.send({resultado: result});
+  }
+});
 
         await createHistoryEntry({ firstArg: a, operationName: "ADD" })
         return res.send({ result });

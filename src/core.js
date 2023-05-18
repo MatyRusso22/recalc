@@ -7,7 +7,10 @@ function subtract(a, b) {
 }
 
 function multiply(a, b) {
-  return a * b;
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    throw new Error('Uno de los parámetros no es un número');
+  }
+    return a * b;
 }
 
 function divide(a, b) {

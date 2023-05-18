@@ -1,5 +1,6 @@
 import core from "../src/core.js";
 
+
 describe("Subtract", () => {
   test("Deberia 2 - 2 = 0", () => {
     expect(core.sub(2, 2)).toBe(0);
@@ -63,6 +64,10 @@ describe("Prueba de la funcion producto", () => {
   //producto de dos numeros negativos debe ser mayor que 0
   test("El producto de dos números negativos debe ser mayor a 0", () => {
     expect(core.mul(-10, -5)).toBeGreaterThan(0);
+  });
+
+  test('Debería lanzar un error al intentar usar un parámetro que no es un número', () => {
+    expect(() => core.mul(2, "A")).toThrow('Uno de los parámetros no es un número');
   });
 });
 
