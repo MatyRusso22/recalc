@@ -2,16 +2,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import controllers from './controllers.js';
 
-export async function build() {
-    const app = express();
+const PORT = process.env.PORT || 8080;
 
-    app.use(bodyParser.json())
+const app = express();
 
-    app.get('/', (req, res) => {
-        res.send({ ok: true })
-    })
+app.use(bodyParser.json())
 
-    app.use("/api/v1", controllers);
+app.get('/', (req, res) => {
+    res.send({ ok: true })
+})
 
-    return app
-}
+app.use("/api/v1", controllers);
+
+app.listen(PORT, () => {
+    console.log(`API running on http://localhost:${PORT}`)
+})
