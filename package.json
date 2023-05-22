@@ -1,12 +1,13 @@
 {
   "name": "src",
-  "version": "1.1.0",
-  "description": "Calculadora con funciones simples.",
+  "version": "1.2.0",
+  "description": "",
   "main": "src/cli.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon src/api.js",
-    "start": "node src/api.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "seed": "node src/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,10 @@
   "type": "module",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "sequelize": "^6.31.1",
+    "sqlite3": "^5.1.6",
+    "supertest": "^6.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

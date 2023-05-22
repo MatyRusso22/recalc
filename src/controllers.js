@@ -1,6 +1,8 @@
 import express from "express";
 import core from "./core.js";
 
+import {createHistoryEntry} from "./models.js";
+
 const router = express.Router();
 
 router.get("/sub/:a/:b", async function (req, res) {
@@ -12,7 +14,14 @@ router.get("/sub/:a/:b", async function (req, res) {
     res.status(400).send({error: "Uno de los parámetros no es un número"});
   } else {
     const result = core.sub(a, b);
-    return res.send({resultado: result});
+
+    await createHistoryEntry({
+      firstArg: a,
+      secondArg: b,
+      result: result,
+      operationName: "SUB",
+    });
+    return res.send({result});
   }
 });
 

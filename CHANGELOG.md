@@ -1,7 +1,12 @@
 # Changelog
 
-## [1.1.1] 01-05-2023
-- Sincronizamos el fork del trabajo con el main
+## [1.2.0] 15-05-2023
+
+### Added
+
+- Sequelize para el manejo de base de datos
+- Tests de integración sobre API y modelo
+- Integración continua
 
 ## [1.1.0] 20-04-2023
 
