@@ -1,55 +1,61 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import {Sequelize, DataTypes} from "sequelize";
 
-const inTest = process.env.NODE_ENV === 'test';
+const inTest = process.env.NODE_ENV === "test";
 
 const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    logging: !inTest,
-    storage: inTest ? ':memory:' : './db.sqlite3'
-})
-
-export const History = sequelize.define('History', {
-    firstArg: {
-        type: DataTypes.NUMBER,
-        allowNull: false
-    },
-    secondArg: {
-        type: DataTypes.NUMBER,
-        allowNull: true
-    },
-    result: {
-        type: DataTypes.NUMBER,
-        allowNull: true
-    }
+  dialect: "sqlite",
+  logging: !inTest,
+  storage: inTest ? ":memory:" : "./db.sqlite3",
 });
 
-export const Operation = sequelize.define('Operation', {
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+export const History = sequelize.define("History", {
+  firstArg: {
+    type: DataTypes.NUMBER,
+    allowNull: false,
+  },
+  secondArg: {
+    type: DataTypes.NUMBER,
+    allowNull: true,
+  },
+  result: {
+    type: DataTypes.NUMBER,
+    allowNull: true,
+  },
 });
 
-Operation.hasMany(History)
-History.belongsTo(Operation)
+export const Operation = sequelize.define("Operation", {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
 
-export async function createHistoryEntry({ firstArg, secondArg, operationName, result }) {
-    const operation = await Operation.findOne({
-        where: {
-            name: operationName
-        }
-    });
+Operation.hasMany(History);
+History.belongsTo(Operation);
 
-    return History.create({
-        firstArg,
-        result,
-        OperationId: operation.id
-    })
+export async function createHistoryEntry({
+  firstArg,
+  secondArg,
+  operationName,
+  result,
+}) {
+  const operation = await Operation.findOne({
+    where: {
+      name: operationName,
+    },
+  });
+
+  return History.create({
+    firstArg,
+    secondArg,
+    result,
+    OperationId: operation.id,
+  });
 }
 
 export function createTables() {
-    return Promise.all([
-        History.sync({ force: true }),
-        Operation.sync({ force: true })
-    ]);
+  return Promise.all([
+    History.sync({force: true}),
+    Operation.sync({force: true}),
+  ]);
 }
