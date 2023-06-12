@@ -97,6 +97,12 @@ router.get("/pow/:a/:b", async function (req, res) {
       .send({error: "Los parámetros no son válidos para la potencia"});
   } else {
     const result = core.pow(a, b);
+    await createHistoryEntry({
+      firstArg: a,
+      secondArg: b,
+      result,
+      operationName: "POW",
+    });
     return res.send({resultado: result});
   }
 });
