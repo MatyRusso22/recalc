@@ -102,4 +102,22 @@ describe("API DIV", () => {
     const resultado = res.body.resultado;
 
   }});
+  
+  describe("API POW", () => {
+    
+        //potencia con un parámetro string
+        test("Si uno de los parametros es string debería dar error", async () => {
+          const app = await api.build();
+          const a = 4;
+          const b = "string"; // Un parámetro como una cadena
+        
+          const res = await request(app)
+            .get(`/api/v1/pow/${a}/${b}`)
+            .expect(400)
+            .expect("Content-Type", "application/json; charset=utf-8");
+        
+          expect(res.body.error).toBe("Los parámetros no son válidos para la potencia");
+        });
+    
+  });
 })
